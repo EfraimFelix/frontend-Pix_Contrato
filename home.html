@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bradesco</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="myscripts"></script>
+
+    <script>
+        // Verificando "login" do usuario
+        if (!localStorage.getItem("user_name") || !localStorage.getItem("user_address"))
+            window.location.href = "index.html"
+    </script>
+
+</head>
+
+<body style="background-image: url(https://wallpaperplay.com/walls/full/e/9/2/71247.jpg)">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="javascript:void(0)">Bradesco</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navb">
+
+
+            <div class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#pixModal">PIX</button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-dark" data-toggle="modal"
+                        data-target="#contractModal">Contrato</button>
+                </li>
+            </div>
+            <div class="navbar-nav pr-1">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        ############
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <button type="button" class="dropdown-item" onclick="logout()">Sair</button>
+                    </div>
+                </li>
+
+            </div>
+        </div>
+    </nav>
+    <br>
+
+    <div class="container">
+        <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-10">
+                <div class="card-deck">
+                    <div class="card">
+                        <h5 class="card-header bg-dark text-white">PIX</h5>
+                        <img src="./assets/pix.png" class="card-img-top" alt="./assets/pix.png">
+                        <div class="card-body"></div>
+                        <div class="card-footer text-center bg-white" style="border: none;">
+                            <button type="button" class="btn btn-dark" data-toggle="modal"
+                                data-target="#pixModal">Acessar</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h5 class="card-header bg-dark text-white">Contrato Inteligente</h5>
+                        <img src="./assets/contract.png" class="card-img-top" alt="./assets/pix.png">
+                        <div class="card-body"></div>
+                        <div class="card-footer text-center bg-white" style="border: none;">
+                            <button type="button" class="btn btn-dark" data-toggle="modal"
+                                data-target="#contractModal">Acessar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<div class="modal fade" id="contractModal" tabindex="-1" aria-labelledby="contractModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contractModalLabel">Contrato Inteligente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="needs-validation" id="contractModalForm" validate>
+                                <div class="form-row">
+                                    <div class="col-md-4">
+                                        <label for="validationTooltip01">Local:</label>
+                                    </div>
+                                    <div class="col-md-8 d-flex">
+                                        <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="local1" name="local" value="confiavel"
+                                                class="custom-control-input" required>
+                                            <label class="custom-control-label" for="local1">Confiável</label>
+                                        </div>
+                                        <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="local2" name="local" value="naoConfiavel"
+                                                class="custom-control-input" required>
+                                            <label class="custom-control-label" for="local2">Não
+                                                Confiável</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4">
+                                        <label for="validationTooltip01">Horário:</label>
+                                    </div>
+                                    <div class="col-md-8 d-flex">
+                                        <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="horario1" name="horario" value="dia"
+                                                class="custom-control-input" required>
+                                            <label class="custom-control-label" for="horario1">Dia</label>
+                                        </div>
+                                        <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="horario2" name="horario" value="noite"
+                                                class="custom-control-input" required>
+                                            <label class="custom-control-label" for="horario2">Noite</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr style="border-top: 2px solid rgba(0, 0, 0, 0.1);" />
+
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" id="inputSelectContract" required>
+                                        <option value="" selected>Selecione um Contrato</option>
+                                        <option value="0x8A0DEF059465f19D177D52B6675ff3Eb6E3e9F5c">Emprestimo
+                                            (0x8A0DEF059465f19D177D52B6675ff3Eb6E3e9F5c)</option>
+                                        <option value="0x8765407643216bB75C7945F3E842D00030999233">Token
+                                            (0x8765407643216bB75C7945F3E842D00030999233)</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button"
+                                            onclick="getDataFunction()">Selecionar</button>
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-3" id="selectFunction" hidden>
+                                    <select class="custom-select" id="inputSelectFunction" onclick="showInputs()"
+                                        required>
+                                        <option value="" selected>Selecione uma funções</option>
+                                    </select>
+                                </div>
+
+                                <div id="inputTextFunction" hidden>
+                                    <!-- <div class="input-group mb-3">
+                                            <input type="text" class="form-control" id="validationDefault01"
+                                                placeholder="Endereço Cliente" required>
+                                        </div> -->
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-4">
+                                        <label for="validationTooltip01">Métodos Aprovação:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input dispSeguranca" type="checkbox"
+                                                id="inlineCheckbox1" value="PIN">
+                                            <label class="form-check-label" for="inlineCheckbox1">PIN</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input dispSeguranca" type="checkbox"
+                                                id="inlineCheckbo5" value="Biometria">
+                                            <label class="form-check-label" for="inlineCheckbo5">Biometria</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input dispSeguranca" type="checkbox"
+                                                id="inlineCheckbox6" value="Token">
+                                            <label class="form-check-label" for="inlineCheckbox6">Token</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input dispSeguranca" type="checkbox"
+                                                id="inlineCheckbox8" value="TAG NFC">
+                                            <label class="form-check-label" for="inlineCheckbox8">TAG NFC</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="responseArea" hidden>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submit" form="contractModalForm" class="btn btn-primary"
+                    onclick="executeContract(event);return false">Executar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="pixModal" tabindex="-1" aria-labelledby="pixModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div class="">
+                    <h5 class="modal-title" id="pixModalLabel">PIX</h5>
+                </div>
+
+                <div class="ml-5">
+                    <div class="input-group mb-3">
+                        <select class="custom-select" id="operacao">
+                            <option selected>Operação</option>
+                            <option value="Transferir">Transferir</option>
+                            <option value="Aprovar">Aprovar</option>
+                            <option value="Configurar">Configurar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form>
+
+                                <form class="needs-validation" novalidate>
+                                    <div class="form-row">
+                                        <div class="col-md-4">
+                                            <label for="validationTooltip01">Local:</label>
+                                        </div>
+                                        <div class="col-md-8 d-flex">
+                                            <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="local1-pix" name="local-pix" value="confiavel"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="local1-pix">Confiável</label>
+                                            </div>
+                                            <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="local2-pix" name="local-pix"
+                                                    value="naoConfiavel" class="custom-control-input">
+                                                <label class="custom-control-label" for="local2-pix">Não
+                                                    Confiável</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-4">
+                                            <label for="validationTooltip01">Horário:</label>
+                                        </div>
+                                        <div class="col-md-8 d-flex">
+                                            <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="horario1-pix" name="horario-pix" value="dia"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="horario1-pix">Dia</label>
+                                            </div>
+                                            <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="horario2-pix" name="horario-pix" value="noite"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="horario2-pix">Noite</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-row">
+                                        <div class="col-md-4">
+                                            <label for="validationTooltip01">Destino:</label>
+                                        </div>
+                                        <div class="col-md-8 d-flex">
+                                            <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="destino1" name="destino-pix" value="cadastrado"
+                                                    class="custom-control-input" required
+                                                    onclick="cadastroSelected(this)">
+                                                <label class="custom-control-label" for="destino1">Cadastrado</label>
+                                            </div>
+                                            <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="destino2" name="destino-pix"
+                                                    value="naoCadastrado" class="custom-control-input" required
+                                                    onclick="cadastroSelected(this)">
+                                                <label class="custom-control-label" for="destino2">Não
+                                                    Cadast.</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 d-flex">
+                                        <div class="input-group mb-3">
+                                            <input type="number" min="0" class="form-control" id="tempoCadastrado"
+                                                placeholder="Tempo de Cadastro (dias)" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 d-flex">
+                                        <div class="input-group mb-3">
+                                            <input type="number" min="0" class="form-control" id="numAprovadores"
+                                                placeholder="No. Aprovadores" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 d-flex">
+                                        <div class="input-group mb-3">
+                                            <select class="custom-select" id="score-destino">
+                                                <option selected>Nível de Confiança no Destino</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- <hr style="border-top: 2px solid rgba(0, 0, 0, 0.1);" /> -->
+
+                                    <div class="col-md-12 d-flex">
+                                        <div class="input-group mb-3">
+                                            <input type="number" min="0" class="form-control" id="valor-pix"
+                                                placeholder="Valor" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-md-4">
+                                            <label for="validationTooltip01">Métodos Aprovação:</label>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input dispSeguranca" type="checkbox"
+                                                    id="inlineCheckbox4" value="PIN">
+                                                <label class="form-check-label" for="inlineCheckbox4">PIN</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input dispSeguranca" type="checkbox"
+                                                    id="inlineCheckbox2" value="Biometria">
+                                                <label class="form-check-label" for="inlineCheckbox2">Biometria</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input dispSeguranca" type="checkbox"
+                                                    id="inlineCheckbox3" value="Token">
+                                                <label class="form-check-label" for="inlineCheckbox3">Token</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input dispSeguranca" type="checkbox"
+                                                    id="inlineCheckbox7" value="TAG NFC">
+                                                <label class="form-check-label" for="inlineCheckbox7">TAG NFC</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </form>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="responseAreaPix" hidden>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-primary" onclick="executePix(event)">Executar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Recuperar o valor armazenado no localStorage
+    const user_name = localStorage.getItem("user_name");
+    const user_address = localStorage.getItem("user_address");
+
+    // Atribuir nome de usuario ao menu
+    document.getElementById("navbarDropdown").innerHTML = user_name;
+
+    function logout() {
+        //Remover item armazenado no localStorage
+        localStorage.removeItem("user_name")
+        localStorage.removeItem("user_address")
+
+        // Redirecionar para a página inicial
+        window.location.href = "home.html";
+    }
+</script>
+
+<script src="http://azimi.me/json-formatter-js/dist/json-formatter.umd.js"></script>
+<script>
+
+    let response = null
+
+
+    function getDataFunction() {
+
+        hiddenAll()
+
+        const smartContract = document.getElementById("inputSelectContract").value
+
+        if (!smartContract)
+            return alert("Selecione um contrato")
+
+        const options = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        };
+
+        fetch(`http://127.0.0.1:3000/smart-contract/function/${smartContract}`, options)
+            .then(res => res.json())
+            .then(res => { response = res; showFunctions() })
+            .catch(err => console.error(err.message));
+
+
+    }
+
+    function showFunctions() {
+
+        const select = document.getElementById('inputSelectFunction');
+        select.innerHTML = '<option value="" selected>Selecione uma função</option>';
+
+        // Adicionar as opções obtidas da API
+        response.forEach((func, index) => {
+            const option = document.createElement('option');
+            option.value = index;
+            option.text = func.description;
+            select.appendChild(option);
+        });
+
+        document.getElementById('selectFunction').hidden = false;
+    }
+
+    function showInputs() {
+
+        const inputParent = document.getElementById('inputTextFunction');
+
+        inputParent.innerHTML = ""
+
+        const select = parseInt(document.getElementById('inputSelectFunction').value);
+
+        if (select >= 0)
+            response[select].inputs.forEach(input => addInput(inputParent, 'text', `${input.name} (${input.type})`));
+
+        document.getElementById('inputTextFunction').hidden = false;
+
+    }
+
+    // Crie uma função para adicionar os inputs
+    function addInput(inputParent, type, placeholder) {
+
+        // Crie os elementos <div> e <input>
+        const div = document.createElement('div');
+        div.className = 'input-group mb-3';
+        const input = document.createElement('input');
+        input.type = type;
+        input.className = 'form-control contract-params';
+        input.placeholder = placeholder;
+        input.required = true;
+
+        // Adicione o <input> à <div>
+        div.appendChild(input);
+
+        // Adicione a <div> ao elemento pai
+        inputParent.appendChild(div);
+    }
+
+    function hiddenAll() {
+        document.getElementById('selectFunction').hidden = true;
+        document.getElementById('inputTextFunction').hidden = true;
+        document.getElementById("responseArea").hidden = true;
+    }
+
+    function executeContract(e) {
+        e.preventDefault()
+        const local = document.querySelector('div#contractModal input[name="local"]:checked').value;
+        const horario = document.querySelector('div#contractModal input[name="horario"]:checked').value;
+
+        const functionId = document.querySelector("div#contractModal #inputSelectFunction").value
+        const functionName = response[functionId].name
+        const contractParams = new Array(...document.querySelectorAll("div#contractModal .contract-params")).map(x => x.value)
+
+        const dispSeguranca = new Array(...document.querySelectorAll('div#contractModal .dispSeguranca')).filter(x => x.checked).map(x => x.value)
+
+        const user_name = localStorage.getItem("user_name");
+        const user_address = localStorage.getItem("user_address");
+        const user_agencia = localStorage.getItem("user_agencia");
+        const user_tipo_conta = localStorage.getItem("user_tipo_conta");
+        const user_num_conta = localStorage.getItem("user_num_conta");
+
+        const tipo_operador = localStorage.getItem("tipo_operador");
+        const papel = localStorage.getItem("papel");
+        const autenticacao = localStorage.getItem("autenticacao");
+        const aprovacao = localStorage.getItem("aprovacao");
+
+        const responseArea = document.getElementById("responseArea")
+        responseArea.innerHTML = "<h6>Requisição: </h6>"
+        responseArea.hidden = false;
+
+        console.log({
+            usuario: {
+                nome: user_name,
+                // address: user_address,
+                agencia: user_agencia,
+                // tipo_conta: user_tipo_conta,
+                num_conta: user_num_conta,
+            }, contexto: {
+                local, horario, dispSeguranca,
+            },
+            transacao: {
+                tipo: "contrato",
+                endereco_contrato: "0x8765407643216bB75C7945F3E842D00030999233",
+                params: contractParams,
+                function: functionName
+            }
+        })
+
+        responseArea.appendChild(new JSONFormatter({
+            conta_origem: {
+                nome: user_name,
+                // address: user_address,
+                agencia: user_agencia,
+                num_conta: user_num_conta,
+            }, operador: {
+                tipo_operador,
+                papel: papel.split(','),
+                autenticacao,
+                aprovacao: dispSeguranca
+            },
+            operacao: {
+                produto: "contrato",
+                local,
+                horaInicioOp: horario == "dia" ? { "hora": 13, "minuto": 0 } : { "hora": 23, "minuto": 0 },
+                endereco_contrato: "0x8765407643216bB75C7945F3E842D00030999233",
+                params: contractParams,
+                function: functionName
+            }
+        }).render())
+
+        // const options = {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({
+        //         usuario: localStorage.getItem("user_name"),
+        //         usuarioAddress: localStorage.getItem("user_address"),
+        //         local,
+        //         horario,
+        //         account_to_connect: "0x232DC4c91437D7d4d5BA87442289639f3190C50c",
+        //         function: functionName,
+        //         params: contractParams,
+        //         dispSeguranca
+        //     })
+        // };
+
+        // console.log({
+        //     usuario: localStorage.getItem("user_name"),
+        //     usuarioAddress: localStorage.getItem("user_address"),
+        //     local,
+        //     horario,
+        //     functionName,
+        //     contractParams,
+        //     dispSeguranca
+        // })
+
+        // fetch(`http://127.0.0.1:3000/smart-contract/`, options)
+        //     .then(res => res.json())
+        //     .then(res => { console.log(res); responseArea.appendChild(new JSONFormatter(res).render()) })
+        //     .catch(err => console.error(err.message));
+
+
+    }
+
+</script>
+
+<script>
+
+    function executePix(e) {
+        e.preventDefault()
+        const tipoOperacao = document.querySelector("div#pixModal #operacao").value
+
+        const local = document.querySelector('div#pixModal input[name="local-pix"]:checked').value;
+        const horario = document.querySelector('div#pixModal input[name="horario-pix"]:checked').value;
+
+        const destino = document.querySelector('div#pixModal input[name="destino-pix"]:checked').value;
+        const tempoCadastro = document.querySelector('div#pixModal #tempoCadastrado').value;
+        const numAprovadores = document.querySelector('div#pixModal #numAprovadores').value;
+        const scoreDestino = document.querySelector("div#pixModal #score-destino").value
+
+        const valor = document.querySelector("div#pixModal #valor-pix").value
+
+        const dispSeguranca = new Array(...document.querySelectorAll('div#pixModal .dispSeguranca')).filter(x => x.checked).map(x => x.value)
+
+        const user_name = localStorage.getItem("user_name");
+        const user_address = localStorage.getItem("user_address");
+        const user_agencia = localStorage.getItem("user_agencia");
+        const user_num_conta = localStorage.getItem("user_num_conta");
+
+        const tipo_operador = localStorage.getItem("tipo_operador");
+        const papel = localStorage.getItem("papel");
+        const autenticacao = localStorage.getItem("autenticacao");
+        const aprovacao = localStorage.getItem("aprovacao");
+
+        const responseArea = document.getElementById("responseAreaPix")
+        responseArea.innerHTML = "<h6>Requisição: </h6>"
+        responseArea.hidden = false;
+
+        responseArea.appendChild(new JSONFormatter({
+            conta_origem: {
+                nome: user_name,
+                // address: user_address,
+                agencia: user_agencia,
+                num_conta: user_num_conta,
+            },
+            operador: {
+                tipo_operador,
+                papel: papel.split(','),
+                autenticacao,
+                aprovacao: dispSeguranca
+            }, operacao: {
+                produto: "pix",
+                tipo: tipoOperacao,
+                valor,
+                aprovacoes: numAprovadores,
+                somaOperacoesDia: 0,
+                local,
+                tipoDestino: destino,
+                tempoCadastroDestino: tempoCadastro,
+                nivelConfiancaDestino: scoreDestino,
+                horaInicioOp: horario == "dia" ? { "hora": 13, "minuto": 0 } : { "hora": 23, "minuto": 0 }
+            }
+        }).render())
+    }
+
+    function cadastroSelected(radio) {
+        const inputReadOnly = document.getElementById('tempoCadastrado');
+
+        if (radio.value === 'naoCadastrado') {
+            inputReadOnly.readOnly = true;
+            inputReadOnly.value = '0';
+        } else {
+            inputReadOnly.readOnly = false;
+        }
+    }
+
+
+    document.getElementById("operacao").addEventListener("change", function () {
+        var selectedValue = this.value;
+
+        document.getElementById("numAprovadores").disabled = false;
+        document.getElementById("tempoCadastrado").disabled = false;
+        document.getElementById("score-destino").disabled = false;
+        document.getElementById("valor-pix").disabled = false;
+
+        // Verificar qual opção foi selecionada e desabilitar os campos apropriados
+        if (selectedValue != "Transferir") {
+
+            document.getElementById("numAprovadores").value = "";
+            document.getElementById("tempoCadastrado").value = "";
+            document.getElementById("score-destino").value = "";
+            document.getElementById("valor-pix").value = "";
+
+            document.getElementById("numAprovadores").disabled = true;
+            document.getElementById("tempoCadastrado").disabled = true;
+            document.getElementById("score-destino").disabled = true;
+            document.getElementById("valor-pix").disabled = true;
+        }
+    });
+
+
+</script>

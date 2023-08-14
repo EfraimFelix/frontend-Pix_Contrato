@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bradesco</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="myscripts"></script>
+
+</head>
+
+<body style="background-image: url(https://wallpaperplay.com/walls/full/e/9/2/71247.jpg)">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="javascript:void(0)">Bradesco</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <br>
+    <br>
+    <br>
+
+    <div class="container">
+        <div class="row d-flex justify-content-center text-center">
+            <div class="col">
+                <div class="card-deck">
+                    <div class="card">
+                        <h5 class="card-header bg-dark text-white">Banco</h5>
+                        <img class="card-img-top" src="./assets/users2/user2.png" alt="Banco">
+                        <div class="card-body"></div>
+                        <div class="card-footer text-center bg-white" style="border: none;">
+                            <button type="button" class="btn btn-dark" data-name="Banco"
+                                data-address="0x232DC4c91437D7d4d5BA87442289639f3190C50c" data-agencia="1234"
+                                data-num_conta="84568" data-tipo_operador="1oTitular" data-papel="correntista,aprovador,admin"
+                                data-autenticacao="senha4" data-aprovacao="token"
+                                onclick="redirect(this)">Acessar</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h5 class="card-header bg-dark text-white">Alice - Usuario Padrao</h5>
+                        <img class="card-img-top" src="./assets/users2/user1.png" alt="Alice - Usuario Padrao">
+                        <div class="card-body"></div>
+                        <div class="card-footer text-center bg-white" style="border: none;">
+                            <button type="button" class="btn btn-dark" data-name="Alice" data-agencia="1234"
+                                data-num_conta="67890" data-address="0xa80d4bC365ed35e43f3ABe45E1671f1eF8f0c3AA"
+                                data-tipo_operador="1oTitular" data-papel="correntista,aprovador,admin"
+                                data-autenticacao="senha1" data-aprovacao=":pin2,token"
+                                onclick="redirect(this)">Acessar</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h5 class="card-header bg-dark text-white">Carlos - Vulneravel</h5>
+                        <img class="card-img-top" src="./assets/users2/user2.png" alt="Carlos - Vulneravel">
+                        <div class="card-body"></div>
+                        <div class="card-footer text-center bg-white" style="border: none;">
+                            <button type="button" class="btn btn-dark" data-name="Carlos"
+                                data-address="0x232DC4c91437D7d4d5BA87442289639f3190C50c" data-agencia="1234"
+                                data-num_conta="98753" data-tipo_operador="2oTitular" data-papel="vulneravel"
+                                data-autenticacao="senha4" data-aprovacao="token"
+                                onclick="redirect(this)">Acessar</button>
+                        </div>
+                    </div>
+                    <div class="card d-flex">
+                        <h5 class="card-header bg-dark text-white">Tadeu - Tutor</h5>
+                        <img class="card-img-top" src="./assets/users2/user3.png" alt="Tadeu - Tutor">
+                        <div class="card-body"></div>
+                        <div class="card-footer text-center bg-white" style="border: none;">
+                            <button type="button" class="btn btn-dark" data-name="Tadeu" data-agencia="1234"
+                                data-num_conta="34385" data-address="0xBEC5F5aD89796E2e1255bfc2872255Bb646a1Adf"
+                                data-tipo_operador="terceiro" data-papel="aprovador" data-autenticacao="senha5"
+                                data-aprovacao="tagT" onclick="redirect(this)">Acessar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function redirect(element) {
+        // Armazenar o valor no localStorage
+        localStorage.setItem("user_name", element.getAttribute('data-name'));
+        localStorage.setItem("user_address", element.getAttribute('data-address'));
+        localStorage.setItem("user_agencia", element.getAttribute('data-agencia'));
+        localStorage.setItem("user_num_conta", element.getAttribute('data-num_conta'));
+
+        // Dados operador
+        localStorage.setItem("tipo_operador", element.getAttribute('data-tipo_operador'));
+        localStorage.setItem("papel", element.getAttribute('data-papel'));
+        localStorage.setItem("autenticacao", element.getAttribute('data-autenticacao'));
+        localStorage.setItem("aprovacao", element.getAttribute('data-aprovacao'));
+
+        // Redirecionar para a página principal
+        window.location.href = "home.html";
+    }
+</script>
