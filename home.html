@@ -629,8 +629,8 @@
         const request = {
             conta_origem: {
                 usuario: user_name,
-                agencia: user_agencia,
-                cc: user_num_conta,
+                agencia: parseInt(user_agencia),
+                cc: parseInt(user_num_conta),
             },
             operador: {
                 tipo_operador,
