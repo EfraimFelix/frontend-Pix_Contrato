@@ -113,7 +113,7 @@
                                             <label class="custom-control-label" for="local1">Confiável</label>
                                         </div>
                                         <div class="col-md-6 custom-control custom-radio custom-control-inline">
-                                            <input type="radio" id="local2" name="local" value="naoConfiavel"
+                                            <input type="radio" id="local2" name="local" value="publico"
                                                 class="custom-control-input" required>
                                             <label class="custom-control-label" for="local2">Não
                                                 Confiável</label>
@@ -224,10 +224,10 @@
                 <div class="ml-5">
                     <div class="input-group mb-3">
                         <select class="custom-select" id="operacao">
-                            <option selected>Operação</option>
-                            <option value="Transferir">Transferir</option>
-                            <option value="Aprovar">Aprovar</option>
-                            <option value="Configurar">Configurar</option>
+                            <option value="" selected>Operação</option>
+                            <option value="transferir">Transferir</option>
+                            <option value="aprovar">Aprovar</option>
+                            <option value="configurar">Configurar</option>
                         </select>
                     </div>
                 </div>
@@ -254,8 +254,8 @@
                                                 <label class="custom-control-label" for="local1-pix">Confiável</label>
                                             </div>
                                             <div class="col-md-6 custom-control custom-radio custom-control-inline">
-                                                <input type="radio" id="local2-pix" name="local-pix"
-                                                    value="naoConfiavel" class="custom-control-input">
+                                                <input type="radio" id="local2-pix" name="local-pix" value="publico"
+                                                    class="custom-control-input">
                                                 <label class="custom-control-label" for="local2-pix">Não
                                                     Confiável</label>
                                             </div>
@@ -342,22 +342,22 @@
                                         <div class="col-md-8">
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input dispSeguranca" type="checkbox"
-                                                    id="inlineCheckbox4" value="PIN">
+                                                    id="inlineCheckbox4" value="pin2">
                                                 <label class="form-check-label" for="inlineCheckbox4">PIN</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input dispSeguranca" type="checkbox"
-                                                    id="inlineCheckbox2" value="Biometria">
+                                                    id="inlineCheckbox2" value="Digital">
                                                 <label class="form-check-label" for="inlineCheckbox2">Biometria</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input dispSeguranca" type="checkbox"
-                                                    id="inlineCheckbox3" value="Token">
+                                                    id="inlineCheckbox3" value="token">
                                                 <label class="form-check-label" for="inlineCheckbox3">Token</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input dispSeguranca" type="checkbox"
-                                                    id="inlineCheckbox7" value="TAG NFC">
+                                                    id="inlineCheckbox7" value="tagA">
                                                 <label class="form-check-label" for="inlineCheckbox7">TAG NFC</label>
                                             </div>
                                         </div>
@@ -369,6 +369,8 @@
                             </form>
                         </div>
                     </div>
+                </div>
+                <div id="requestAreaPix" hidden>
                 </div>
                 <div id="responseAreaPix" hidden>
                 </div>
@@ -612,16 +614,24 @@
         const autenticacao = localStorage.getItem("autenticacao");
         const aprovacao = localStorage.getItem("aprovacao");
 
-        const responseArea = document.getElementById("responseAreaPix")
-        responseArea.innerHTML = "<h6>Requisição: </h6>"
-        responseArea.hidden = false;
+        if(!tipoOperacao){
+            alert('Selecione uma operação')
+            return
+        }
 
-        responseArea.appendChild(new JSONFormatter({
+        const requestArea = document.getElementById("requestAreaPix")
+        requestArea.innerHTML = "<h6>Requisição: </h6>"
+        requestArea.hidden = false;
+
+        const responseArea = document.getElementById("responseAreaPix")
+        responseArea.innerHTML = '<h6>Resposta: <b id="responseMessagePix"></b> </h6>'
+        responseArea.hidden = false;
+        
+        const request = {
             conta_origem: {
-                nome: user_name,
-                // address: user_address,
+                usuario: user_name,
                 agencia: user_agencia,
-                num_conta: user_num_conta,
+                cc: user_num_conta,
             },
             operador: {
                 tipo_operador,
@@ -629,18 +639,31 @@
                 autenticacao,
                 aprovacao: dispSeguranca
             }, operacao: {
-                produto: "pix",
+                produto: "PIX",
                 tipo: tipoOperacao,
-                valor,
-                aprovacoes: numAprovadores,
+                valor: parseInt(valor),
+                aprovacoes: parseInt(numAprovadores),
                 somaOperacoesDia: 0,
                 local,
                 tipoDestino: destino,
-                tempoCadastroDestino: tempoCadastro,
-                nivelConfiancaDestino: scoreDestino,
+                tempoCadastroDestino: parseInt(tempoCadastro),
+                nivelConfiancaDestino: parseInt(scoreDestino),
                 horaInicioOp: horario == "dia" ? { "hora": 13, "minuto": 0 } : { "hora": 23, "minuto": 0 }
             }
-        }).render())
+        }
+
+        requestArea.appendChild(new JSONFormatter(request).render())
+
+        const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(request)
+        };
+
+        fetch("http://127.0.0.1:8080/pix", options)
+            .then(res => res.json())
+            .then(res => { responseArea.appendChild(new JSONFormatter(res.result).render()); document.getElementById("responseMessagePix").innerHTML = res.Autorizacao })
+            .catch(err => console.log(err));
     }
 
     function cadastroSelected(radio) {
@@ -664,7 +687,7 @@
         document.getElementById("valor-pix").disabled = false;
 
         // Verificar qual opção foi selecionada e desabilitar os campos apropriados
-        if (selectedValue != "Transferir") {
+        if (selectedValue != "transferir") {
 
             document.getElementById("numAprovadores").value = "";
             document.getElementById("tempoCadastrado").value = "";
