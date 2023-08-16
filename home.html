@@ -12,7 +12,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-    <script src="myscripts"></script>
 
     <script>
         // Verificando "login" do usuario
@@ -22,7 +21,7 @@
 
 </head>
 
-<body style="background-image: url(https://wallpaperplay.com/walls/full/e/9/2/71247.jpg)">
+<body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="javascript:void(0)">Bradesco</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
@@ -614,7 +613,7 @@
         const autenticacao = localStorage.getItem("autenticacao");
         const aprovacao = localStorage.getItem("aprovacao");
 
-        if(!tipoOperacao){
+        if (!tipoOperacao) {
             alert('Selecione uma operação')
             return
         }
@@ -626,7 +625,7 @@
         const responseArea = document.getElementById("responseAreaPix")
         responseArea.innerHTML = '<h6>Resposta: <b id="responseMessagePix"></b> </h6>'
         responseArea.hidden = false;
-        
+
         const request = {
             conta_origem: {
                 usuario: user_name,
@@ -662,8 +661,13 @@
 
         fetch("http://127.0.0.1:8080/pix", options)
             .then(res => res.json())
-            .then(res => { responseArea.appendChild(new JSONFormatter(res.result).render()); document.getElementById("responseMessagePix").innerHTML = res.Autorizacao })
+            .then(res => {
+                responseArea.appendChild(new JSONFormatter(res.result).render());
+                document.getElementById("responseMessagePix").innerHTML = res.Autorizacao;
+                closeJSONObjects()
+            })
             .catch(err => console.log(err));
+
     }
 
     function cadastroSelected(radio) {
@@ -700,6 +704,18 @@
             document.getElementById("valor-pix").disabled = true;
         }
     });
+
+    function closeJSONObjects() {
+        var botoes = document.querySelectorAll(".json-formatter-toggler-link");
+        botoes.forEach(function (botao) {
+            var evento = new MouseEvent("click", {
+                bubbles: true,
+                cancelable: true,
+                view: window
+            });
+            botao.dispatchEvent(evento);
+        });
+    }
 
 
 </script>
