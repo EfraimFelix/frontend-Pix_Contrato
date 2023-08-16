@@ -659,7 +659,7 @@
             body: JSON.stringify(request)
         };
 
-        fetch("http://127.0.0.1:8080/pix", options)
+        fetch("localhost:8080/pix", options)
             .then(res => res.json())
             .then(res => {
                 responseArea.appendChild(new JSONFormatter(res.result).render());
