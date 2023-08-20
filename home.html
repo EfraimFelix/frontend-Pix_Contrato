@@ -681,30 +681,6 @@
         }
     }
 
-
-    document.getElementById("operacao").addEventListener("change", function () {
-        var selectedValue = this.value;
-
-        document.getElementById("numAprovadores").disabled = false;
-        document.getElementById("tempoCadastrado").disabled = false;
-        document.getElementById("score-destino").disabled = false;
-        document.getElementById("valor-pix").disabled = false;
-
-        // Verificar qual opção foi selecionada e desabilitar os campos apropriados
-        if (selectedValue != "transferir") {
-
-            document.getElementById("numAprovadores").value = "";
-            document.getElementById("tempoCadastrado").value = "";
-            document.getElementById("score-destino").value = "";
-            document.getElementById("valor-pix").value = "";
-
-            document.getElementById("numAprovadores").disabled = true;
-            document.getElementById("tempoCadastrado").disabled = true;
-            document.getElementById("score-destino").disabled = true;
-            document.getElementById("valor-pix").disabled = true;
-        }
-    });
-
     function closeJSONObjects() {
         var botoes = document.querySelectorAll(".json-formatter-toggler-link");
         botoes.forEach(function (botao) {
