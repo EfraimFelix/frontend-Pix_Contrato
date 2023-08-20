@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bradesco</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+
+    <script>
+        // Verificando "login" do usuario
+        if (!localStorage.getItem("user_name") || !localStorage.getItem("user_address"))
+            window.location.href = "index.html"
+    </script>
+
+</head>
+
+<body>
+
+    <div id="menu"> </div>
+
+    <br>
+
+    <div class="container">
+        <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-10">
+                <div class="card-deck">
+
+                    <div class="card" id="cardPix"> </div>
+
+                    <div class="card" id="cardContrato"> </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalPix"> </div>
+
+    <div id="modalContrato"> </div>
+
+    <div id="modalContexto"> </div>
+
+</body>
+
+</html>
+
+<script src="http://azimi.me/json-formatter-js/dist/json-formatter.umd.js"></script>
+<script src="./js/indexDB.js"></script>
+<script src="./js/pix.js"></script>
+<script src="./js/contrato.js"></script>
+<script src="./js/contexto.js"></script>
+
+<script>
+    function carregarArquivo(caminho, elemento) {
+        return fetch(caminho)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById(elemento).innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Erro ao carregar o arquivo:', error);
+            });
+    }
+
+    // Recuperar User
+    const user_name = localStorage.getItem("user_name");
+    const user_address = localStorage.getItem("user_address");
+
+    carregarArquivo('./sections/cards/pix.html', 'cardPix');
+    carregarArquivo('./sections/cards/contrato.html', 'cardContrato');
+    carregarArquivo('./sections/modals/pix.html', 'modalPix');
+    carregarArquivo('./sections/modals/contrato.html', 'modalContrato');
+    carregarArquivo('./sections/modals/contexto.html', 'modalContexto');
+
+    // Esperando o menu ser carregado para inserir username no menu
+    Promise.all([
+        carregarArquivo('./sections/menu.html', 'menu'),
+    ]).then(() => {
+        document.getElementById("navbarDropdown").innerText = user_name
+    });
+
+    function logout() {
+
+        localStorage.clear()
+
+        window.location.href = "home.html";
+    }
+
+</script>

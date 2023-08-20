@@ -1,0 +1,192 @@
+<div class="modal fade" id="modalcontexto" tabindex="-1" aria-labelledby="modalcontextoLabel" aria-hidden="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div class="">
+                    <h5 class="modal-title" id="modalcontextoLabel">Contexto</h5>
+                </div>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="container">
+                                <ul class="list-group">
+
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>Jornada 1</strong>
+                                            <small class="ml-2 text-muted">Pix</small>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-danger btn-sm mr-2"
+                                                onclick="excluirItem(this)">Excluir</button>
+                                            <button class="btn btn-primary btn-sm"
+                                                onclick="editarItem(this)">Editar</button>
+                                        </div>
+                                    </li>
+
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>Jornada 2</strong>
+                                            <small class="ml-2 text-muted">Pix</small>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-danger btn-sm mr-2"
+                                                onclick="excluirItem(this)">Excluir</button>
+                                            <button class="btn btn-primary btn-sm"
+                                                onclick="editarItem(this)">Editar</button>
+                                        </div>
+                                    </li>
+
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>Jornada 1</strong>
+                                            <small class="ml-2 text-muted">Contrato inteligente</small>
+                                        </div>
+                                        <div>
+                                            <button class="btn btn-danger btn-sm mr-2"
+                                                onclick="excluirItem(this)">Excluir</button>
+                                            <button class="btn btn-primary btn-sm"
+                                                onclick="editarItem(this)">Editar</button>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="requestAreaPix" hidden>
+                </div>
+                <div id="responseAreaPix" hidden>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#addItemModal">Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="addItemModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addItemModalLabel">Adicionar/Editar Contexto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addContexto">
+
+                    <div class="form-group">
+                        <label for="produto">Produto:</label>
+                        <select class="form-control" id="produto" name="produto" required>
+                            <option value="Pix">Pix</option>
+                            <option value="Contrato">Contrato</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label for="validationTooltip01">Local:</label>
+                        </div>
+                        <div class="col-md-8 d-flex">
+                            <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="local1-pix" name="local" value="confiavel"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="local1-pix">Confiável</label>
+                            </div>
+                            <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="local2-pix" name="local" value="publico"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="local2-pix">Não
+                                    Confiável</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label for="validationTooltip01">Horário:</label>
+                        </div>
+                        <div class="col-md-8 d-flex">
+                            <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="horario1-pix" name="horario" value="dia"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="horario1-pix">Dia</label>
+                            </div>
+                            <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="horario2-pix" name="horario" value="noite"
+                                    class="custom-control-input">
+                                <label class="custom-control-label" for="horario2-pix">Noite</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-4">
+                            <label for="validationTooltip01">Destino:</label>
+                        </div>
+                        <div class="col-md-8 d-flex">
+                            <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="destino1" name="destino" value="cadastrado"
+                                    class="custom-control-input" onclick="cadastroSelected(this)" required>
+                                <label class="custom-control-label" for="destino1">Cadastrado</label>
+                            </div>
+                            <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                <input type="radio" id="destino2" name="destino" value="naoCadastrado"
+                                    class="custom-control-input" onclick="cadastroSelected(this)" required>
+                                <label class="custom-control-label" for="destino2">Não
+                                    Cadast.</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="tempoCadastrado">Tempo Cadastrado:</label>
+                        <input type="number" class="form-control" id="tempoCadastrado" placeholder="0"
+                            name="tempoCadastrado" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="numeroAprovadores">Número de Aprovadores:</label>
+                        <input type="number" class="form-control" id="numeroAprovadores" placeholder="0"
+                            name="numeroAprovadores" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nivelConfianca">Nível de Confiança:</label>
+                        <select class="form-control" id="nivelConfianca" name="nivelConfianca" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="nomeContexto">Apelido:</label>
+                        <input type="text" class="form-control" id="nomeContexto"
+                            placeholder="Jornada 1, Contexto vulnerável" name="nomeContexto" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Fechar
+                </button>
+                <button type="button" onclick="addContexto()" data-dismiss="modal" class="btn btn-primary">
+                    Salvar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

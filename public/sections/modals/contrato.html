@@ -1,0 +1,123 @@
+<div class="modal fade" id="modalcontrato" tabindex="-1" aria-labelledby="modalcontratoLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalcontratoLabel">Contrato Inteligente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form class="needs-validation" id="modalcontratoForm" validate>
+                                <div class="form-row">
+                                    <div class="col-md-4">
+                                        <label for="validationTooltip01">Local:</label>
+                                    </div>
+                                    <div class="col-md-8 d-flex">
+                                        <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="local1" name="local" value="confiavel"
+                                                class="custom-control-input" required>
+                                            <label class="custom-control-label" for="local1">Confiável</label>
+                                        </div>
+                                        <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="local2" name="local" value="publico"
+                                                class="custom-control-input" required>
+                                            <label class="custom-control-label" for="local2">Não
+                                                Confiável</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-4">
+                                        <label for="validationTooltip01">Horário:</label>
+                                    </div>
+                                    <div class="col-md-8 d-flex">
+                                        <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="horario1" name="horario" value="dia"
+                                                class="custom-control-input" required>
+                                            <label class="custom-control-label" for="horario1">Dia</label>
+                                        </div>
+                                        <div class="col-md-6 custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="horario2" name="horario" value="noite"
+                                                class="custom-control-input" required>
+                                            <label class="custom-control-label" for="horario2">Noite</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr style="border-top: 2px solid rgba(0, 0, 0, 0.1);" />
+
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" id="inputSelectContract" required>
+                                        <option value="" selected>Selecione um Contrato</option>
+                                        <option value="0x8A0DEF059465f19D177D52B6675ff3Eb6E3e9F5c">Emprestimo
+                                            (0x8A0DEF059465f19D177D52B6675ff3Eb6E3e9F5c)</option>
+                                        <option value="0x8765407643216bB75C7945F3E842D00030999233">Token
+                                            (0x8765407643216bB75C7945F3E842D00030999233)</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="button"
+                                            onclick="getDataFunction()">Selecionar</button>
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-3" id="selectFunction" hidden>
+                                    <select class="custom-select" id="inputSelectFunction" onclick="showInputs()"
+                                        required>
+                                        <option value="" selected>Selecione uma funções</option>
+                                    </select>
+                                </div>
+
+                                <div id="inputTextFunction" hidden>
+                                    <!-- <div class="input-group mb-3">
+                                            <input type="text" class="form-control" id="validationDefault01"
+                                                placeholder="Endereço Cliente" required>
+                                        </div> -->
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col-md-4">
+                                        <label for="validationTooltip01">Métodos Aprovação:</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input dispSeguranca" type="checkbox"
+                                                id="inlineCheckbox1" value="PIN">
+                                            <label class="form-check-label" for="inlineCheckbox1">PIN</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input dispSeguranca" type="checkbox"
+                                                id="inlineCheckbo5" value="Biometria">
+                                            <label class="form-check-label" for="inlineCheckbo5">Biometria</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input dispSeguranca" type="checkbox"
+                                                id="inlineCheckbox6" value="Token">
+                                            <label class="form-check-label" for="inlineCheckbox6">Token</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input dispSeguranca" type="checkbox"
+                                                id="inlineCheckbox8" value="TAG NFC">
+                                            <label class="form-check-label" for="inlineCheckbox8">TAG NFC</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="responseArea" hidden>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submit" form="modalcontratoForm" class="btn btn-primary"
+                    onclick="executeContract(event);return false">Executar</button>
+            </div>
+        </div>
+    </div>
+</div>
