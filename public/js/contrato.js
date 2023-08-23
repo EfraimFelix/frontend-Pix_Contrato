@@ -103,7 +103,7 @@ function executeContract(e) {
     const aprovacao = localStorage.getItem("aprovacao");
 
     const responseArea = document.getElementById("responseArea")
-    responseArea.innerHTML = "<h6>Requisição: </h6>"
+    responseArea.innerHTML = "<h7>Requisição: </h7>"
     responseArea.hidden = false;
 
     console.log({

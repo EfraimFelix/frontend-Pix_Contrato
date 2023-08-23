@@ -33,11 +33,11 @@ function executePix(e) {
     }
 
     const requestArea = document.getElementById("requestAreaPix")
-    requestArea.innerHTML = "<h6>Requisição: </h6>"
+    requestArea.innerHTML = "<h7>Requisição: </h7>"
     requestArea.hidden = false;
 
     const responseArea = document.getElementById("responseAreaPix")
-    responseArea.innerHTML = '<h6>Resposta: <b id="responseMessagePix"></b> </h6>'
+    responseArea.innerHTML = '<h7>Resposta: <b id="responseMessagePix"></b> </h7>'
     responseArea.hidden = false;
 
     const request = {
@@ -76,8 +76,8 @@ function executePix(e) {
     fetch("http://localhost:8080/pix", options)
         .then(res => res.json())
         .then(res => {
-            responseArea.appendChild(new JSONFormatter(res.result).render());
-            document.getElementById("responseMessagePix").innerHTML = res.Autorizacao;
+            responseArea.appendChild(new JSONFormatter(res.result.result ? res.result.result : res.result).render());
+            document.getElementById("responseMessagePix").innerHTML = res.Autorizacao + (res.result.Motivo ? ` - ${res.result.Motivo}` : "");
             closeJSONObjects()
         })
         .catch(err => console.log(err));
