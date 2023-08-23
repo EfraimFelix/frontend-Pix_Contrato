@@ -143,7 +143,6 @@ function displayContextoPix() {
 
 function setAttrContexto(id) {
 
-    console.log(12123)
     const transaction = db.transaction([STORE_NAME], 'readonly');
     const store = transaction.objectStore(STORE_NAME);
     const request = store.get(id);
@@ -151,7 +150,6 @@ function setAttrContexto(id) {
     request.onsuccess = (event) => {
         const item = event.target.result;
 
-        console.log(item)
         document.getElementById('pix-local').value = item.local
         document.getElementById('pix-horario').value = item.horario
         document.getElementById('pix-destino').value = item.destino

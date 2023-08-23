@@ -120,7 +120,6 @@ function addContexto() {
 
     const newItem = { nomeContexto, produto, local, horario, destino, tempoCadastro, numAprovadores, scoreDestino };
 
-    console.log(newItem)
     addItemToStore(newItem);
 }
 
